@@ -1,0 +1,63 @@
+package org.kd.buggyservice.dao;
+
+import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.List;
+
+import org.kd.buggyservice.entities.Author;
+import org.kd.buggyservice.entities.Book;
+
+@Repository
+public class BookRepo extends Repo {
+
+    @Transactional
+    public long create(Book book) {
+        entityManager.persist(book);
+        getSession().save(book);
+        return book.getId();
+    }
+
+
+    @Transactional(readOnly = true)
+    public List<Book> readAll() {
+        var session = getSession();
+        var builder = session.getCriteriaBuilder();
+        var criteria = builder.createQuery(Book.class);
+        criteria.from(Book.class);
+
+        var books = session.createQuery(criteria).getResultList();
+        session.close();
+        return books;
+    }
+
+    @Transactional(readOnly = true)
+    public Book read(long id) {
+        var session = getSession();
+        var builder = session.getCriteriaBuilder();
+        CriteriaQuery<Book> query = builder.createQuery(Book.class);
+        Root<Book> root = query.from(Book.class);
+        query.select(root).where(builder.equal(root.get("id"), id));//SELECT from book WHERE id=id
+        Query<Book> q = session.createQuery(query);
+        return q.getSingleResult();
+    }
+
+    @Transactional
+    public Book update(long id, String newTitle, int newPublishYear) {
+        // TODO: error on purpose - instead of update, a duplicated record is created,
+        //  and authorId cannot be changed - it's hardcoded
+        var entity = new Book(id, newTitle, newPublishYear, new Author());
+        create(entity);
+        return entity;
+    }
+
+    @Transactional
+    public boolean delete(long id) {
+        //TODO: error on purpose - nothing  deleted here
+        return true;
+    }
+
+}
