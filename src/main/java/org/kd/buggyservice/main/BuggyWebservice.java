@@ -39,6 +39,7 @@ public class BuggyWebservice {
                 + "\nGET http://localhost:" + port + "/readLibraries"
                 + "\nPOST http://localhost:" + port + "/updateAuthor"
                 + "\nDELETE http://localhost:" + port + "/deleteBook/2002\n"
+                + "\nPOST http://localhost:" + port + "/stop\n"
         );
 
         LoggerFactory.getLogger(BuggyWebservice.class).info("\nSample JSONs for update:"
