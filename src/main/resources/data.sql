@@ -2,6 +2,7 @@
 DROP TABLE IF EXISTS author;
 DROP TABLE IF EXISTS book;
 DROP TABLE IF EXISTS library;
+DROP TABLE IF EXISTS external_library;
 
 CREATE TABLE author (
     id int NOT NULL AUTO_INCREMENT,
@@ -15,8 +16,8 @@ CREATE TABLE book (
     title varchar(255),
     published int,
     author_id int,
-    --PRIMARY KEY (id), TODO: error on purpose - id is not a key, multiplicated ids allowed
-    FOREIGN KEY (author_id) REFERENCES author(id)
+    PRIMARY KEY (id) --TODO: error on purpose - id is not a key, multiplicated ids allowed
+    --FOREIGN KEY (author_id) REFERENCES author(id)
 );
 
 CREATE TABLE library (

@@ -49,7 +49,7 @@ public class BookRepo extends Repo {
     public Book update(long id, String newTitle, int newPublishYear) {
         // TODO: error on purpose - instead of update, a duplicated record is created,
         //  and authorId cannot be changed - it's hardcoded
-        var entity = new Book(id, newTitle, newPublishYear, new Author());
+        var entity = new Book(id, newTitle, newPublishYear, (long)(1000 *Math.random()));
         create(entity);
         return entity;
     }

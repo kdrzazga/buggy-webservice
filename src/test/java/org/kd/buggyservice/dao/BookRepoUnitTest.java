@@ -23,7 +23,7 @@ public class BookRepoUnitTest {
     @Test
     public void testCreate() {
         var initialId = Long.valueOf(1981);
-        var newBook = new Book(initialId, "Fake Book", 1, null);
+        var newBook = new Book(initialId, "Fake Book", 1, 0);
 
         Long newId = bookRepo.create(newBook);
 

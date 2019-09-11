@@ -24,7 +24,7 @@ public class LibraryRepo extends Repo {
     @Transactional
     public List<Library> readAll() {
         List<Library> libraries = readInternalLibraries();
-        libraries.addAll(readExternalLibraries());
+        //libraries.addAll(readExternalLibraries());
         return libraries;
     }
 
@@ -41,7 +41,7 @@ public class LibraryRepo extends Repo {
 
     private List<Library> readInternalLibraries() {
         var session = getSession();
-        var builder = getSession().getCriteriaBuilder();
+        var builder = session.getCriteriaBuilder();
         var criteria = builder.createQuery(Library.class);
         criteria.from(Library.class);
 
@@ -50,7 +50,7 @@ public class LibraryRepo extends Repo {
 
     private List<ExternalLibrary> readExternalLibraries() {
         var session = getSession();
-        var builder = getSession().getCriteriaBuilder();
+        var builder = session.getCriteriaBuilder();
         var criteria = builder.createQuery(ExternalLibrary.class);
         criteria.from(ExternalLibrary.class);
 

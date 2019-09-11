@@ -30,7 +30,9 @@ public class AuthorMgmt {
             e.printStackTrace();
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(null);
+                    .header("message", e.getLocalizedMessage())
+                    .body(Long.valueOf(-1));
+            //TODO: Security error - detailed stacktrace should only be visible on sever console, never on client
         }
     }
 
@@ -40,7 +42,7 @@ public class AuthorMgmt {
 
         try {
             var author = authorRepo.read(id);
-            Thread.sleep(Math.round(7000 + 18000 * Math.random()));
+            Thread.sleep(Math.round(5000 + 18000 * Math.random()));
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body(author);
@@ -50,6 +52,7 @@ public class AuthorMgmt {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .header("message", e.getMessage())
+                    //TODO: Security error - detailed stacktrace should only be visible on sever console, never on client (even in header)
                     .build();
         }
     }
@@ -80,8 +83,8 @@ public class AuthorMgmt {
             e.printStackTrace();
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .header("message", e.getMessage())
-                    .body("");
+                    .body(e.getMessage());
+            //TODO: Security error - detailed stacktrace should only be visible on sever console, never on client
         }
     }
 
@@ -90,12 +93,10 @@ public class AuthorMgmt {
         return (authorRepo.delete(id))
                 ? ResponseEntity
                 .status(HttpStatus.OK)
-                .header("message", "Author " + id + " deleted.")
-                .build()
+                .body("Author " + id + " deleted.")
                 : ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .header("message", "Couldn't delete author with id = " + id)
-                .build();
+                .body("Couldn't delete author with id = " + id);
+        //TODO: No error message on console here
     }
-
 }

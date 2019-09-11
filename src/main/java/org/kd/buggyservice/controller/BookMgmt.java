@@ -24,7 +24,7 @@ public class BookMgmt {
     @PostMapping(path = "/createBook/{authorId}/{title}/{published_year}")
     public ResponseEntity<Long> create(@PathVariable Long authorId, @PathVariable String title, @PathVariable Long published_year){
         var author = authorRepo.read(authorId);
-        var newBook = new Book(author, published_year.intValue(), title);
+        var newBook = new Book(author.getId(), published_year.intValue(), title);
         var newId = bookRepo.create(newBook);
 
         return ResponseEntity
@@ -64,7 +64,7 @@ public class BookMgmt {
             e.printStackTrace();
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .header("message", e.getMessage())
+                    .header("message", e.getCause().getLocalizedMessage())
                     .body("");
         }
     }
@@ -75,12 +75,11 @@ public class BookMgmt {
         return (bookRepo.delete(id))
                 ? ResponseEntity
                 .status(HttpStatus.OK)
-                .header("message", "Book " + id + " deleted.")
-                .build()
+                .body( "Book " + id + " deleted.")
+
                 : ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .header("message", "Couldn't delete book with id = " + id)
-                .build();
+                .body("Couldn't delete book with id = " + id);
     }
 
 }

@@ -60,7 +60,6 @@ public class LibraryMgmt {
             e.printStackTrace();
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .header("message", e.getMessage())
                     .body(e.getLocalizedMessage());
         }
     }

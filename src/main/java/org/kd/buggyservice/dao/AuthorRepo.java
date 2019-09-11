@@ -1,6 +1,5 @@
 package org.kd.buggyservice.dao;
 
-import org.hibernate.SQLQuery;
 import org.hibernate.query.Query;
 import org.kd.buggyservice.entities.Author;
 import org.springframework.data.jpa.repository.Modifying;
@@ -24,7 +23,7 @@ public class AuthorRepo extends Repo {
     @Modifying
     public boolean delete(long id) {
         var session = getSession();
-        // TODO: error on purpose - instead on single record, the whole table is dropped
+        // TODO: error on purpose - instead of single record, the whole table is dropped
         var query2 = session.createSQLQuery("drop table Author");
         return (0 == query2.executeUpdate());
     }

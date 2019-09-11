@@ -20,9 +20,10 @@ public class Book implements Serializable {
     private int published;
 
     //@ManyToOne
-    private Author authorId;
+    //private Author authorId;
+    private long authorId;
 
-    public Book(Author author, Integer published, String title) {
+    public Book(long author, Integer published, String title) {
         this.authorId = author;
         this.published = published;
         this.title = title;
