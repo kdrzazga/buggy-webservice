@@ -48,7 +48,7 @@ public class BookMgmt {
                 .body(book);
     }
 
-    @PostMapping(path = "/updateBook", consumes = "application/json", produces = "application/json")
+    @PutMapping(path = "/updateBook", consumes = "application/json", produces = "application/json")
     public ResponseEntity<String> update(@RequestBody String bookJson) {
 
         try {

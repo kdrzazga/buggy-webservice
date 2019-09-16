@@ -6,17 +6,14 @@
 
     <groupId>org.kd</groupId>
     <artifactId>buggywebservice</artifactId>
-    <version>0.2.0-SNAPSHOT</version>
+    <version>0.2.0-alpha</version>
 
     <properties>
         <maven.compiler.target>10</maven.compiler.target>
         <maven.compiler.source>10</maven.compiler.source>
 
-        <spring.version>5.1.1.RELEASE</spring.version>
-        <spring-boot.version>2.0.7.RELEASE</spring-boot.version>
-        <spring-boot-starter-data-jpa.version>2.1.1.RELEASE</spring-boot-starter-data-jpa.version>
-        <spring-boot-starter-actuator.version>2.1.6.RELEASE</spring-boot-starter-actuator.version>
-        <spring-security.version>2.1.4.RELEASE</spring-security.version>
+        <spring.version>5.0.15.RELEASE</spring.version>
+        <spring-boot.version>2.0.9.RELEASE</spring-boot.version>
         <javax.inject.version>1</javax.inject.version>
 
         <hibernate.version>5.4.1.Final</hibernate.version>
@@ -42,6 +39,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
         <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
@@ -112,7 +114,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <version>${spring-boot-starter-data-jpa.version}</version>
+            <version>${spring-boot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -122,7 +124,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
-            <version>${spring-boot-starter-actuator.version}</version>
+            <version>${spring-boot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -141,12 +143,7 @@
             <version>${spring-boot.version}</version>
             <scope>test</scope>
         </dependency>
-        <!--<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-            <version>${spring-security.version}</version>
-        </dependency>
-        --><dependency>
+        <dependency>
             <groupId>javax.ws.rs</groupId>
             <artifactId>javax.ws.rs-api</artifactId>
             <version>${ws.version}</version>

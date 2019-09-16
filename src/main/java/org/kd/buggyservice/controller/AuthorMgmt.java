@@ -42,7 +42,7 @@ public class AuthorMgmt {
 
         try {
             var author = authorRepo.read(id);
-            Thread.sleep(Math.round(5000 + 18000 * Math.random()));
+            Thread.sleep(Math.round(5000 + 12000 * Math.random()));
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body(author);
@@ -67,7 +67,7 @@ public class AuthorMgmt {
     }
 
 
-    @PostMapping(path = "/updateAuthor", consumes = "application/json", produces = "application/json")
+    @PutMapping(path = "/updateAuthor", consumes = "application/json", produces = "application/json")
     public ResponseEntity<String> update(@RequestBody String authorJson) {
 
         try {

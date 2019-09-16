@@ -8,7 +8,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
-import org.kd.buggyservice.entities.Author;
 import org.kd.buggyservice.entities.Book;
 
 @Repository

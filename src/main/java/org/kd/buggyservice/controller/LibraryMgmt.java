@@ -44,7 +44,7 @@ public class LibraryMgmt {
                 .body(libs);
     }
 
-    @PostMapping(path = "/updateLibrary", consumes = "application/json", produces = "application/json")
+    @PutMapping(path = "/updateLibrary", consumes = "application/json", produces = "application/json")
     public ResponseEntity<String> update(@RequestBody String libJson) {
 
         try {

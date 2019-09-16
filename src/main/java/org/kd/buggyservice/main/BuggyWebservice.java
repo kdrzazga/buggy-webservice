@@ -29,6 +29,7 @@ public class BuggyWebservice {
     private static void writeInfo() {
         LoggerFactory.getLogger(BuggyWebservice.class).info("\n\n\nSERVER STARTED");
         LoggerFactory.getLogger(BuggyWebservice.class).info(GlobalInfo.getDbInfo());
+        LoggerFactory.getLogger(BuggyWebservice.class).info(GlobalInfo.getAppCredentials());
 
         LoggerFactory.getLogger(BuggyWebservice.class).info(GlobalInfo.getSampleRequestsInfo());
 
