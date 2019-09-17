@@ -1,6 +1,7 @@
 package org.kd.buggyservice.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.kd.buggyservice.common.ExceptionFormatter;
 import org.kd.buggyservice.dao.AuthorRepo;
 import org.kd.buggyservice.dao.BookRepo;
 import org.kd.buggyservice.entities.Book;
@@ -61,11 +62,11 @@ public class BookMgmt {
                     .status(HttpStatus.OK)
                     .body(bookAsString);
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .header("message", Optional.ofNullable(e.getCause()).map(Throwable::getLocalizedMessage).orElse("No error message"))
+                    .header("message", ExceptionFormatter.fetchStacktrace(e))
                     .body("");
         }
     }

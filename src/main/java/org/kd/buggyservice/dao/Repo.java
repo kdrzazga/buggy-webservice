@@ -1,14 +1,11 @@
 package org.kd.buggyservice.dao;
 
 import org.hibernate.Session;
-import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-@Repository
-abstract class Repo {
-
+public abstract class Repo {
     @PersistenceContext
     protected EntityManager entityManager;
 
@@ -21,6 +18,4 @@ abstract class Repo {
         }
         return entityManager.unwrap(Session.class);
     }
-
-
 }

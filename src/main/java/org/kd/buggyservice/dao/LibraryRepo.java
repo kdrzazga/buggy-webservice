@@ -1,17 +1,20 @@
 package org.kd.buggyservice.dao;
 
+import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.kd.buggyservice.entities.ExternalLibrary;
 import org.kd.buggyservice.entities.Library;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
-public class LibraryRepo extends Repo {
+public class LibraryRepo extends Repo{
 
     @Transactional
     public Long create(String address) {
@@ -22,6 +25,11 @@ public class LibraryRepo extends Repo {
     }
 
     @Transactional
+    public Library read(long id) {
+        return readLibrary(id);
+    }
+
+    @Transactional
     public List<Library> readAll() {
         List<Library> libraries = readInternalLibraries();
         //libraries.addAll(readExternalLibraries());
@@ -29,7 +37,26 @@ public class LibraryRepo extends Repo {
     }
 
     @Transactional
-    public Library read(long id) {
+    public Library update(long id, String newAddress) {
+        return updateLibraryAddress(id, newAddress);
+    }
+
+    @Transactional
+    public boolean delete(long id) {
+        updateLibraryAddress(id, null);
+        //TODO: Functional error on purpose - deleting is only resetting fields!
+        return true;
+    }
+
+    private Library updateLibraryAddress(long id, String newAddress) {
+        var entity = readLibrary(id);
+        entity.setAddress(newAddress);
+        entityManager.persist(entity);
+        entityManager.flush();
+        return entity;
+    }
+
+    private Library readLibrary(long id) {
         var session = getSession();
         var builder = getSession().getCriteriaBuilder();
         CriteriaQuery<Library> query = builder.createQuery(Library.class);
@@ -57,18 +84,5 @@ public class LibraryRepo extends Repo {
         return session.createQuery(criteria).getResultList();
     }
 
-    public Library update(long id, String newAddress) {
 
-        var entity = read(id);
-        entity.setAddress(newAddress);
-        entityManager.persist(entity);
-        entityManager.flush();
-        return entity;
-    }
-
-    public boolean delete(long id) {
-        update(id, null);
-        //TODO: Functional error on purpose - deleting is only resetting fields!
-        return true;
-    }
 }

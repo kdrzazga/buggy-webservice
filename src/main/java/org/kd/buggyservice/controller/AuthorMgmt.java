@@ -1,6 +1,7 @@
 package org.kd.buggyservice.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.kd.buggyservice.common.ExceptionFormatter;
 import org.kd.buggyservice.dao.AuthorRepo;
 import org.kd.buggyservice.entities.Author;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.List;
 
 @RestController
@@ -30,7 +33,7 @@ public class AuthorMgmt {
             e.printStackTrace();
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .header("message", e.getLocalizedMessage())
+                    .header("message", ExceptionFormatter.fetchStacktrace(e))
                     .body(Long.valueOf(-1));
             //TODO: Security error - detailed stacktrace should only be visible on sever console, never on client
         }
@@ -51,7 +54,7 @@ public class AuthorMgmt {
 
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .header("message", e.getMessage())
+                    .header("message", ExceptionFormatter.fetchStacktrace(e))
                     //TODO: Security error - detailed stacktrace should only be visible on sever console, never on client (even in header)
                     .build();
         }
@@ -73,17 +76,17 @@ public class AuthorMgmt {
         try {
             var objectMapper = new ObjectMapper();
             var author = objectMapper.readValue(authorJson, Author.class);
-            var responseBody = authorRepo.updateAuthorName(author.getId(), author.getName(), author.getLastname());
+            var responseBody = authorRepo.update(author.getId(), author.getName(), author.getLastname());
             var authorAsString = objectMapper.writeValueAsString(responseBody);
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body(authorAsString);
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(e.getMessage());
+                    .body(ExceptionFormatter.fetchStacktrace(e));
             //TODO: Security error - detailed stacktrace should only be visible on sever console, never on client
         }
     }
@@ -99,4 +102,5 @@ public class AuthorMgmt {
                 .body("Couldn't delete author with id = " + id);
         //TODO: No error message on console here
     }
+
 }

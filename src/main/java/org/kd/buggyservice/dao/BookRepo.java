@@ -1,9 +1,12 @@
 package org.kd.buggyservice.dao;
 
+import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
@@ -15,22 +18,7 @@ public class BookRepo extends Repo {
 
     @Transactional
     public long create(Book book) {
-        entityManager.persist(book);
-        getSession().save(book);
-        return book.getId();
-    }
-
-
-    @Transactional(readOnly = true)
-    public List<Book> readAll() {
-        var session = getSession();
-        var builder = session.getCriteriaBuilder();
-        var criteria = builder.createQuery(Book.class);
-        criteria.from(Book.class);
-
-        var books = session.createQuery(criteria).getResultList();
-        session.close();
-        return books;
+        return createBook(book);
     }
 
     @Transactional(readOnly = true)
@@ -44,12 +32,24 @@ public class BookRepo extends Repo {
         return q.getSingleResult();
     }
 
+    @Transactional(readOnly = true)
+    public List<Book> readAll() {
+        var session = getSession();
+        var builder = session.getCriteriaBuilder();
+        var criteria = builder.createQuery(Book.class);
+        criteria.from(Book.class);
+
+        var books = session.createQuery(criteria).getResultList();
+        session.close();
+        return books;
+    }
+
     @Transactional
     public Book update(long id, String newTitle, int newPublishYear) {
         // TODO: Functional error on purpose - instead of update, a duplicated record is created,
         //  and authorId cannot be changed - it's hardcoded
-        var entity = new Book(id, newTitle, newPublishYear, (long)(1000 *Math.random()));
-        create(entity);
+        var entity = new Book(id + 300 + (long)(40 *Math.random()), newTitle, newPublishYear, (long)(1000 *Math.random()));
+        createBook(entity);
         return entity;
     }
 
@@ -59,4 +59,9 @@ public class BookRepo extends Repo {
         return true;
     }
 
+    private long createBook(Book book) {
+        entityManager.persist(book);
+        getSession().save(book);
+        return book.getId();
+    }
 }
