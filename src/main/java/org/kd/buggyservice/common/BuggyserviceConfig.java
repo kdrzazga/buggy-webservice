@@ -36,7 +36,9 @@ class BuggyserviceConfig extends WebSecurityConfigurerAdapter {
         http.httpBasic() //allow for auth with login and password - necessary for Postman to login
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/stop").permitAll()
+                .antMatchers(HttpMethod.GET, "/").permitAll()
+                .antMatchers(HttpMethod.POST, "/stop").permitAll() //TODO: security error - no login required to stop the app
+                .antMatchers(HttpMethod.GET, "/h2-console/**").permitAll() //TODO: security error - anyone can drop whole database
                 .antMatchers(HttpMethod.GET, "/**").authenticated()
                 .antMatchers(HttpMethod.POST, "/create*").hasRole(ADMIN.name())
                 .antMatchers(HttpMethod.PUT, "/**").hasRole(ADMIN.name())
@@ -45,6 +47,8 @@ class BuggyserviceConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().permitAll()
                 .and()
                 .logout().permitAll()
+                .and()
+                .headers().frameOptions().disable() //necessary to allow for proper display of h2-console
                 .and()
                 .csrf().disable();
 

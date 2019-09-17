@@ -68,7 +68,7 @@ public class LibraryRepo extends Repo {
 
     public boolean delete(long id) {
         update(id, null);
-        //TODO: error on purpose - deleting is only resetting fields!
+        //TODO: Functional error on purpose - deleting is only resetting fields!
         return true;
     }
 }

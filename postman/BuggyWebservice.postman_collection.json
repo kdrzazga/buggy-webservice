@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "8358d784-016c-4296-a031-d31288a83f87",
+		"_postman_id": "bf4deedf-e99e-40ed-9b7a-4308ef1327d9",
 		"name": "BuggyWebservice",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -8,6 +8,9 @@
 		{
 			"name": "stop",
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "POST",
 				"header": [],
 				"url": {
@@ -25,12 +28,27 @@
 			"response": []
 		},
 		{
-			"name": "createBook (wrong)",
+			"name": "createBook",
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8081/createBook/1002/Pan Tadeusz/1882",
+					"raw": "http://localhost:8081/createBook/1003/Pan Tadeusz/1882",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -38,7 +56,7 @@
 					"port": "8081",
 					"path": [
 						"createBook",
-						"1002",
+						"1003",
 						"Pan Tadeusz",
 						"1882"
 					]
@@ -116,7 +134,7 @@
 			"response": []
 		},
 		{
-			"name": "updateBook (wrong)",
+			"name": "updateBook",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -137,34 +155,19 @@
 				"header": [
 					{
 						"key": "Content-Type",
+						"name": "Content-Type",
 						"value": "application/json",
 						"type": "text"
 					}
 				],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "id",
-							"value": "2002",
-							"type": "text"
-						},
-						{
-							"key": "title",
-							"value": "Ania z ZIelonego Wzgorza",
-							"type": "text"
-						},
-						{
-							"key": "published",
-							"value": "2019",
-							"type": "text"
-						},
-						{
-							"key": "author",
-							"value": "1001",
-							"type": "text"
+					"mode": "raw",
+					"raw": "{\r\n\t\"id\":2002,\r\n\t\"title\":\"Ania z Zielonego Wzgorza\",\r\n\t\"published\":\"2019\",\r\n\t\"authorId\":\"1001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
 						}
-					]
+					}
 				},
 				"url": {
 					"raw": "http://localhost:8081/updateBook",
@@ -225,6 +228,21 @@
 		{
 			"name": "createAuthor",
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"url": {
@@ -264,7 +282,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8081/readAuthor/1001",
+					"raw": "http://localhost:8081/readAuthor/1002",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -272,7 +290,7 @@
 					"port": "8081",
 					"path": [
 						"readAuthor",
-						"1001"
+						"1002"
 					]
 				}
 			},
@@ -313,7 +331,7 @@
 			"response": []
 		},
 		{
-			"name": "updateAuthor (wrong)",
+			"name": "updateAuthor",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -334,29 +352,19 @@
 				"header": [
 					{
 						"key": "Content-Type",
+						"name": "Content-Type",
 						"value": "application/json",
 						"type": "text"
 					}
 				],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "id",
-							"value": "2002",
-							"type": "text"
-						},
-						{
-							"key": "name",
-							"value": "Roger",
-							"type": "text"
-						},
-						{
-							"key": "lastname",
-							"value": "Zelazny",
-							"type": "text"
+					"mode": "raw",
+					"raw": "{\n\t\"id\" : 1002,\n\t\"name\" : \"Roger\",\n\t\"lastname\" : \"Zelazny\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
 						}
-					]
+					}
 				},
 				"url": {
 					"raw": "http://localhost:8081/updateAuthor",
@@ -375,6 +383,21 @@
 		{
 			"name": "deleteAuthor",
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
 				"body": {
@@ -482,30 +505,40 @@
 			"response": []
 		},
 		{
-			"name": "updateLibrary (wrong)",
+			"name": "updateLibrary",
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PUT",
 				"header": [
 					{
 						"key": "Content-Type",
+						"name": "Content-Type",
 						"value": "application/json",
 						"type": "text"
 					}
 				],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "id",
-							"value": "3002",
-							"type": "text"
-						},
-						{
-							"key": "address",
-							"value": "Radom",
-							"type": "text"
+					"mode": "raw",
+					"raw": "{\n\t\"id\" : 3002,\n\t\"address\" : \"Radom\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
 						}
-					]
+					}
 				},
 				"url": {
 					"raw": "http://localhost:8081/updateLibrary",
@@ -524,6 +557,21 @@
 		{
 			"name": "deleteLibrary",
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
 				"url": {
@@ -609,13 +657,39 @@
 		{
 			"name": "createLibrary",
 			"request": {
-				"method": "GET",
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "http://localhost:8081/createLibrary/Kluczbork/internal",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"createLibrary",
+						"Kluczbork",
+						"internal"
+					]
 				}
 			},
 			"response": []
 		}
-	]
+	],
+	"protocolProfileBehavior": {}
 }

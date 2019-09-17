@@ -19,7 +19,7 @@ public class LibraryMgmt {
 
     @PostMapping(path = "/createLibrary/{address}/{type}")
     public ResponseEntity<Long> create(@PathVariable String address, @PathVariable String type){
-        //TODO: creates only INTERNAL libraries, type is ignored
+        //TODO: Functional error - creates only INTERNAL libraries, type is ignored
         var libId = libraryRepo.create(address);
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -28,7 +28,7 @@ public class LibraryMgmt {
 
     @GetMapping(path = "/readLibrary/{id}")
     public ResponseEntity<Library> read(@PathVariable long id){
-        //TODO: error on purpose - only single INTERNAL library can be read this way,
+        //TODO: Functional error on purpose - only single INTERNAL library can be read this way,
         // while readAll reads all internal and external libs
         var internalLib = libraryRepo.read(id);
         return ResponseEntity
@@ -48,8 +48,8 @@ public class LibraryMgmt {
     public ResponseEntity<String> update(@RequestBody String libJson) {
 
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            Library library = objectMapper.readValue(libJson, Library.class);
+            var objectMapper = new ObjectMapper();
+            var library = objectMapper.readValue(libJson, Library.class);
             var responseBody = libraryRepo.update(library.getId(), library.getAddress());
             String libAsString = objectMapper.writeValueAsString(responseBody);
             return ResponseEntity

@@ -8,10 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.Serializable;
 
+@Entity
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity
 public class Author implements Serializable {
 
     public Author(String name, String lastname){

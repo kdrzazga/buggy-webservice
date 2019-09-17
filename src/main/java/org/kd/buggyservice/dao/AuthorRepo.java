@@ -23,7 +23,7 @@ public class AuthorRepo extends Repo {
     @Modifying
     public boolean delete(long id) {
         var session = getSession();
-        // TODO: error on purpose - instead of single record, the whole table is dropped
+        // TODO: Functional error on purpose - instead of single record, the whole table is dropped
         var query2 = session.createSQLQuery("drop table Author");
         return (0 == query2.executeUpdate());
     }

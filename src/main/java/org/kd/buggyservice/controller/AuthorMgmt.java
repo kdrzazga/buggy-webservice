@@ -38,7 +38,7 @@ public class AuthorMgmt {
 
     @GetMapping(path = "/readAuthor/{id}")
     public ResponseEntity<Author> read(@PathVariable Long id) {
-        //TODO: performance error on purpose - long waiting for reading author
+        //TODO: Performance error on purpose - long waiting for reading author
 
         try {
             var author = authorRepo.read(id);

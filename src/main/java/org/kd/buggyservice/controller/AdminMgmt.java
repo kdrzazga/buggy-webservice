@@ -22,7 +22,6 @@ public class AdminMgmt {
 
     @PostMapping(path = "/stop")
     public void stop() {
-        /*TODO: Security error - client (especially unauthorized) shouldn't have rights to stop server*/
         BuggyWebservice.stop();
     }
 

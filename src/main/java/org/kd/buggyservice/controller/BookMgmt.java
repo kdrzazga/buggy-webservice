@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class BookMgmt {
@@ -52,8 +53,8 @@ public class BookMgmt {
     public ResponseEntity<String> update(@RequestBody String bookJson) {
 
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            Book book = objectMapper.readValue(bookJson, Book.class);
+            var objectMapper = new ObjectMapper();
+            var book = objectMapper.readValue(bookJson, Book.class);
             var responseBody = bookRepo.update(book.getId(), book.getTitle(), book.getPublished());
             String bookAsString = objectMapper.writeValueAsString(responseBody);
             return ResponseEntity
@@ -64,7 +65,7 @@ public class BookMgmt {
             e.printStackTrace();
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .header("message", e.getCause().getLocalizedMessage())
+                    .header("message", Optional.ofNullable(e.getCause()).map(Throwable::getLocalizedMessage).orElse("No error message"))
                     .body("");
         }
     }

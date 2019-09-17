@@ -46,7 +46,7 @@ public class BookRepo extends Repo {
 
     @Transactional
     public Book update(long id, String newTitle, int newPublishYear) {
-        // TODO: error on purpose - instead of update, a duplicated record is created,
+        // TODO: Functional error on purpose - instead of update, a duplicated record is created,
         //  and authorId cannot be changed - it's hardcoded
         var entity = new Book(id, newTitle, newPublishYear, (long)(1000 *Math.random()));
         create(entity);
@@ -55,7 +55,7 @@ public class BookRepo extends Repo {
 
     @Transactional
     public boolean delete(long id) {
-        //TODO: error on purpose - nothing  deleted here
+        //TODO: Functional error on purpose - nothing  deleted here
         return true;
     }
 
