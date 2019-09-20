@@ -9,9 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.List;
 
 @RestController
@@ -69,7 +66,6 @@ public class AuthorMgmt {
                 .body(authors);
     }
 
-
     @PutMapping(path = "/updateAuthor", consumes = "application/json", produces = "application/json")
     public ResponseEntity<String> update(@RequestBody String authorJson) {
 
@@ -102,5 +98,4 @@ public class AuthorMgmt {
                 .body("Couldn't delete author with id = " + id);
         //TODO: No error message on console here
     }
-
 }

@@ -1,42 +1,45 @@
 package org.kd.buggyservice.dao;
 
-import org.h2.jdbc.JdbcSQLException;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsCollectionContaining;
-import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.runner.RunWith;
-import org.kd.buggyservice.entities.Book;
 import org.kd.buggyservice.main.BuggyWebservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.annotation.Order;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest(classes = {BuggyWebservice.class})
 @RunWith(SpringJUnit4ClassRunner.class)
-public class AuthorRepoUnitTest {
+public class AuthorRepoIntegrationTest {
 
     @Autowired
     private AuthorRepo authorRepo;
 
     @Test
-    public void testRead() {
+    @Order(value = 1)
+    public void test_Read() {
         var id = 1001L;
         var expectedLastName = "Mickiewicz";
-        var book1 = authorRepo.read(id);
+        var author = authorRepo.read(id);
 
-        assertEquals("Check if DB script was changed", expectedLastName, book1.getLastname());
+        assertEquals("Check if DB script was changed", expectedLastName, author.getLastname());
     }
 
     @Test
-    public void testReadAllAuthors() {
+    @Order(value = 2)
+    public void test_ReadAllAuthors() {
         var authors = authorRepo.readAll();
 
         assertNotNull(authors);
@@ -50,24 +53,26 @@ public class AuthorRepoUnitTest {
     }
 
     @Test
+    @Order(value = 3)
     public void testCreate() {
 
         var authorName = "Roger";
         var authorLastName = "Zelazny";
         var id = authorRepo.create(authorName, authorLastName);
         assertNotNull(id);
-        var stored  = authorRepo.read(id);
+        var stored = authorRepo.read(id);
         assertNotNull(stored);
         assertEquals(authorName, stored.getName());
         assertEquals(authorLastName, stored.getLastname());
     }
 
     @Test
-    public void testUpdate() {
-        var id = 1001L;
+    @Order(value = 4)
+    public void test_Update() {
+        var id = 1002L;
         var newName = "Test";
         var newLastName = "Writer";
-        authorRepo.updateAuthorName(id, newName, newLastName);
+        authorRepo.update(id, newName, newLastName);
 
         var updated = authorRepo.read(id);
 
@@ -76,6 +81,8 @@ public class AuthorRepoUnitTest {
     }
 
     @Test(expected = Exception.class)
+    //@Ignore
+    @Order(value = 5)
     public void testDelete() {
         authorRepo.delete(1002L);
         //purposely the table was dropped, so nothing can be read

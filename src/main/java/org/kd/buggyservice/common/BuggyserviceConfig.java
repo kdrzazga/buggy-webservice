@@ -51,6 +51,5 @@ class BuggyserviceConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable() //necessary to allow for proper display of h2-console
                 .and()
                 .csrf().disable();
-
     }
 }

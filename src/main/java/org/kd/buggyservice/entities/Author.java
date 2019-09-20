@@ -23,4 +23,12 @@ public class Author implements Serializable {
     private long id;
     private String name;
     private String lastname;
+
+    /*@OneToMany(
+            mappedBy = "post",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Book> books = new ArrayList<>();
+*/
 }
