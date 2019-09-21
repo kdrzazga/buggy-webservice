@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Setter
 public class Author implements Serializable {
 
-    public Author(String name, String lastname){
+    public Author(String name, String lastname) {
         this.name = name;
         this.lastname = lastname;
     }
@@ -24,11 +24,23 @@ public class Author implements Serializable {
     private String name;
     private String lastname;
 
-    /*@OneToMany(
-            mappedBy = "post",
+  /* //Uncomment to create bi-directinal relation
+    @OneToMany(
+            mappedBy = "author",
             cascade = CascadeType.ALL,
-            orphanRemoval = true
+            orphanRemoval = true,
+            fetch = FetchType.EAGER
     )
     private List<Book> books = new ArrayList<>();
-*/
+  */
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Author)) return false;
+
+        var author = (Author) o;
+        return author.id == (this.id)
+                && author.name.equals(this.name)
+                && author.lastname.equals(this.lastname);
+    }
 }

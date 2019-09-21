@@ -12,7 +12,7 @@ public abstract class Repo {
     protected Session getSession() {
         Session session;
         if (entityManager == null
-                || (session = entityManager.unwrap(Session.class)) == null) {
+                || (entityManager.unwrap(Session.class)) == null) {
 
             throw new NullPointerException();
         }

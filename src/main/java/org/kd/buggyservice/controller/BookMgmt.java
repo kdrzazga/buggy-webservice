@@ -22,9 +22,10 @@ public class BookMgmt {
     private AuthorRepo authorRepo;
 
     @PostMapping(path = "/createBook/{authorId}/{title}/{published_year}")
-    public ResponseEntity<Long> create(@PathVariable Long authorId, @PathVariable String title, @PathVariable Long published_year){
+    public ResponseEntity<Long> create(@PathVariable Long authorId, @PathVariable String title, @PathVariable Long published_year) {
         var author = authorRepo.read(authorId);
-        var newBook = new Book(author.getId(), published_year.intValue(), title);
+        //var newBook = new Book(author.getId(), published_year.intValue(), title);
+        var newBook = new Book(author, published_year.intValue(), title);
         var newId = bookRepo.create(newBook);
 
         return ResponseEntity
@@ -33,7 +34,7 @@ public class BookMgmt {
     }
 
     @GetMapping(path = "/readBook/{id}")
-    public ResponseEntity<Book> read(@PathVariable Long id){
+    public ResponseEntity<Book> read(@PathVariable Long id) {
         var book = bookRepo.read(id);
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -41,7 +42,7 @@ public class BookMgmt {
     }
 
     @GetMapping(path = "/readBooks")
-    public ResponseEntity<List<Book>> readAll(){
+    public ResponseEntity<List<Book>> readAll() {
         var book = bookRepo.readAll();
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -75,7 +76,7 @@ public class BookMgmt {
         return (bookRepo.delete(id))
                 ? ResponseEntity
                 .status(HttpStatus.OK)
-                .body( "Book " + id + " deleted.")
+                .body("Book " + id + " deleted.")
 
                 : ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)

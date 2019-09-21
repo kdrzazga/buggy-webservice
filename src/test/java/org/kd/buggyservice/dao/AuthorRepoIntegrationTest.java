@@ -19,6 +19,7 @@ import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+//@Transactional
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest(classes = {BuggyWebservice.class})
 @RunWith(SpringJUnit4ClassRunner.class)

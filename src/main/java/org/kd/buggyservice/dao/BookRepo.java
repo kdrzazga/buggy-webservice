@@ -1,6 +1,7 @@
 package org.kd.buggyservice.dao;
 
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +13,9 @@ import org.kd.buggyservice.entities.Book;
 
 @Repository
 public class BookRepo extends Repo {
+
+    @Autowired
+    private AuthorRepo authorRepo;
 
     @Transactional
     public long create(Book book) {
@@ -45,7 +49,9 @@ public class BookRepo extends Repo {
     public Book update(long id, String newTitle, int newPublishYear) {
         // TODO: Functional error on purpose - instead of update, a duplicated record is created,
         //  and authorId cannot be changed - it's hardcoded
-        var entity = new Book(id + 300 + (long)(40 *Math.random()), newTitle, newPublishYear, (long)(1000 *Math.random()));
+
+        var author = authorRepo.read((long)(1002 + 40 *Math.random()));
+        var entity = new Book(author, newPublishYear, newTitle);
         createBook(entity);
         return entity;
     }

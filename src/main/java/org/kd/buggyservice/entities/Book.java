@@ -1,6 +1,7 @@
 package org.kd.buggyservice.entities;
 
 import lombok.*;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -8,7 +9,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 @AllArgsConstructor
 public class Book implements Serializable {
 
@@ -17,16 +17,23 @@ public class Book implements Serializable {
     private String title;
     private int published;
 
-    /*@ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "authorId")// this means post_id in table indicated by Post entity is a FK
     private Author author;
-    */
-    private long authorId;
 
-    public Book(long author, Integer published, String title) {
+    public Book(Author author, Integer published, String title) {
 
-        this.authorId = author;
+        this.author = author;
         this.published = published;
         this.title = title;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Book)) return false;
+        var book = (Book) o;
+        return book.id == (this.id)
+                && book.title.equals(this.title)
+                && book.published == (this.published);
     }
 }

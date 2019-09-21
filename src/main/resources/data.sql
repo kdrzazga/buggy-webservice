@@ -5,28 +5,28 @@ DROP TABLE IF EXISTS library;
 DROP TABLE IF EXISTS external_library;
 
 CREATE TABLE author (
-    id int NOT NULL AUTO_INCREMENT,
+    id bigint NOT NULL AUTO_INCREMENT,
     name varchar(255),
     lastname varchar(20),
     PRIMARY KEY (id)
 );
 
 CREATE TABLE book (
-    id int  AUTO_INCREMENT,
+    id bigint AUTO_INCREMENT,
     title varchar(255),
     published int,
-    author_id int,
-    PRIMARY KEY (id)
-    --FOREIGN KEY (author_id) REFERENCES author(id)
+    author_id bigint,
+    PRIMARY KEY (id),
+    FOREIGN KEY (author_id) REFERENCES author(id)
 );
 
 CREATE TABLE library (
-    id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
     address varchar(255)
 );
 
 CREATE TABLE external_library(
-    id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
     address varchar(255)
 );
 

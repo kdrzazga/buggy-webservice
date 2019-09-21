@@ -23,6 +23,7 @@ public class NoAuthAuthorEndpointTest {
     private RestUtility restUtility;
 
     private final String port = BuggyWebservice.getPort();
+    private final String probableFailureCause = "Please check if application isn't running while running tests";
 
     @Test(expected = ResourceAccessException.class)//requires authorization
     public void testCreateAuthor() {
@@ -30,7 +31,7 @@ public class NoAuthAuthorEndpointTest {
         ResponseEntity<String> response = restUtility.processHttpRequest(HttpMethod.POST, ""
                 , "http://localhost:" + port + endpoint, MediaType.TEXT_PLAIN.toString());
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(probableFailureCause, HttpStatus.OK, response.getStatusCode());
     }
 
     @Test(expected = ResourceAccessException.class)//requires authorization
@@ -39,7 +40,7 @@ public class NoAuthAuthorEndpointTest {
         ResponseEntity<String> response = restUtility.processHttpRequest(HttpMethod.GET, ""
                 , "http://localhost:" + port + endpoint, MediaType.TEXT_PLAIN.toString());
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(probableFailureCause, HttpStatus.OK, response.getStatusCode());
     }
 
     @Test(expected = ResourceAccessException.class)//requires authorization
@@ -48,7 +49,7 @@ public class NoAuthAuthorEndpointTest {
         ResponseEntity<String> response = restUtility.processHttpRequest(HttpMethod.GET, ""
                 , "http://localhost:" + port + endpoint, MediaType.TEXT_PLAIN.toString());
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(probableFailureCause, HttpStatus.OK, response.getStatusCode());
     }
 
 }

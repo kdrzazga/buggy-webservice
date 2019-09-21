@@ -11,11 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.annotation.Order;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.*;
 
+@Transactional
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest(classes = {BuggyWebservice.class})
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -24,11 +26,15 @@ public class BookRepoIntegrationTest {
     @Autowired
     private BookRepo bookRepo;
 
+    @Autowired
+    private AuthorRepo authorRepo;
+
     @Test
     @Order(value = 1)
     public void testCreate() {
         var initialId = Long.valueOf(1981);
-        var newBook = new Book(initialId, "Fake Book", 1, 0);
+        //var newBook = new Book(initialId, "Fake Book", 1, 0);
+        var newBook = new Book(authorRepo.read(1002L), 1, "Fake Book" );
 
         Long newId = bookRepo.create(newBook);
 
@@ -50,7 +56,7 @@ public class BookRepoIntegrationTest {
 
     @Test
     @Order(value = 3)
-    public void testReadAllBooks() {
+    public void testReadAll() {
         var books = bookRepo.readAll();
 
         assertNotNull(books);
@@ -72,8 +78,8 @@ public class BookRepoIntegrationTest {
 
         var storedBook = bookRepo.read(2001);
 
-        assertNotEquals(book.getTitle(), storedBook.getTitle()); //update is purposely wrong
-        assertEquals(newTitle, updatedBook.getTitle()); //but new record should be ok
+        assertEquals(book, storedBook); //update is purposely wrong
+        assertNotEquals(book, updatedBook); //but new record should be ok
     }
 
     @Test
