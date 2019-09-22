@@ -1,6 +1,7 @@
 package org.kd.buggyservice.dao;
 
 import org.hamcrest.Matchers;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -23,6 +24,10 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class BookRepoIntegrationTest {
 
+    @Ignore
+    @Test
+    public void stub(){
+    }
     @Autowired
     private BookRepo bookRepo;
 
@@ -93,4 +98,5 @@ public class BookRepoIntegrationTest {
         var deletedBook = bookRepo.read(id);
         assertEquals(book, deletedBook);// delete has error on purpose and nothing is deleted
     }
+
 }

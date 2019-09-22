@@ -2,6 +2,7 @@ package org.kd.buggyservice.dao;
 
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsCollectionContaining;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -24,6 +25,11 @@ import static org.junit.Assert.assertNotNull;
 @SpringBootTest(classes = {BuggyWebservice.class})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class AuthorRepoIntegrationTest {
+
+    @Ignore
+    @Test
+    public void stub(){
+    }
 
     @Autowired
     private AuthorRepo authorRepo;

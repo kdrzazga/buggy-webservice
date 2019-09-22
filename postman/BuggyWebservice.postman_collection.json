@@ -162,7 +162,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"id\":2002,\r\n\t\"title\":\"Ania z Zielonego Wzgorza\",\r\n\t\"published\":\"2019\",\r\n\t\"authorId\":\"1001\"\r\n}",
+					"raw": "{\r\n\t\"id\":2004,\r\n\t\"title\":\"Ania z Zielonego Wzgorza\",\r\n\t\"published\":\"2019\",\r\n\t\"author\": {\r\n        \"id\": 1004,\r\n        \"name\": \"George R.R.\",\r\n        \"lastname\": \"Martin\"\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -456,7 +456,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8081/readLibrary/3003",
+					"raw": "http://localhost:8081/readLibrary/3002",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -464,7 +464,7 @@
 					"port": "8081",
 					"path": [
 						"readLibrary",
-						"3003"
+						"3002"
 					]
 				}
 			},
@@ -575,7 +575,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8081/deleteLibrary/3003",
+					"raw": "http://localhost:8081/deleteLibrary/3002",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -583,7 +583,7 @@
 					"port": "8081",
 					"path": [
 						"deleteLibrary",
-						"3003"
+						"3002"
 					]
 				}
 			},

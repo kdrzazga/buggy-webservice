@@ -1,5 +1,6 @@
 package org.kd.buggyservice.endpoints;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.kd.buggyservice.common.RestUtility;
@@ -18,6 +19,11 @@ import static org.junit.Assert.assertEquals;
 @SpringBootTest(classes = {BuggyWebservice.class})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class NoAuthAuthorEndpointTest {
+
+    @Ignore
+    @Test
+    public void stub(){
+    }
 
     @Autowired
     private RestUtility restUtility;

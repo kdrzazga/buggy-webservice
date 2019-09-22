@@ -21,6 +21,10 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class LibraryRepoIntegrationTest {
 
+    @Test
+    public void stub(){
+    }
+
     @Autowired
     LibraryRepo libraryRepo;
 

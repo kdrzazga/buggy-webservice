@@ -54,6 +54,10 @@ public class BookMgmt {
 
         try {
             var objectMapper = new ObjectMapper();
+            bookJson = bookJson
+                    .replaceAll("\r\n", "")
+                    .replaceAll("\t", "");
+
             var book = objectMapper.readValue(bookJson, Book.class);
             var responseBody = bookRepo.update(book.getId(), book.getTitle(), book.getPublished());
             String bookAsString = objectMapper.writeValueAsString(responseBody);
