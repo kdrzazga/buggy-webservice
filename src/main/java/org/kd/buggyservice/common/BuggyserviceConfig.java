@@ -4,6 +4,8 @@ import org.kd.buggyservice.common.repo.BWLoginRepo;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,12 +26,22 @@ class BuggyserviceConfig extends WebSecurityConfigurerAdapter {
         return new RestTemplate();
     }
 
-
     @Bean
     public UserDetailsService userDetailsService() {
         var repo = new BWLoginRepo();
         return new InMemoryUserDetailsManager(repo.getAdmin(), repo.getUser());
     }
+/*
+    @Bean
+    public AuthenticationManager authenticationManager(){
+        new AuthenticationManagerBuilder().inMemoryAuthentication()
+                .withUser("user").password("user").roles("USER")
+                .and().withUser("admin").password("admin").roles("USER", "ADMIN")
+                .and().withUser("user1@example.com").password("user1").roles("USER")
+                .and().withUser("admin1@example.com").password("admin1").roles("USER", "ADMIN")
+        ;
+        return new AuthenticationManagerBuilder().build();
+    }*/
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

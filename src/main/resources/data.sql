@@ -16,6 +16,7 @@ CREATE TABLE book (
     title varchar(255),
     published int,
     author_id bigint,
+
     PRIMARY KEY (id),
     FOREIGN KEY (author_id) REFERENCES author(id)
 );
