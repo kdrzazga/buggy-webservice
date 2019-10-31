@@ -1,6 +1,5 @@
 package org.kd.buggyservice.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.kd.buggyservice.common.ExceptionFormatter;
 import org.kd.buggyservice.dao.AuthorRepo;
 import org.kd.buggyservice.dao.BookRepo;
@@ -50,27 +49,20 @@ public class BookMgmt {
     }
 
     @PutMapping(path = "/updateBook", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<String> update(@RequestBody String bookJson) {
+    public ResponseEntity<Book> update(@RequestBody Book book){
 
         try {
-            var objectMapper = new ObjectMapper();
-            bookJson = bookJson
-                    .replaceAll("\r\n", "")
-                    .replaceAll("\t", "");
-
-            var book = objectMapper.readValue(bookJson, Book.class);
             var responseBody = bookRepo.update(book.getId(), book.getTitle(), book.getPublished());
-            String bookAsString = objectMapper.writeValueAsString(responseBody);
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(bookAsString);
+                    .body(responseBody);
 
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .header("message", ExceptionFormatter.fetchStacktrace(e))
-                    .body("");
+                    .body(null);
         }
     }
 

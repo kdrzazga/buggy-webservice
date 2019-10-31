@@ -1,0 +1,10 @@
+{
+	"id":2004,
+	"title":"Ania z Zielonego Wzgorza",
+	"published":"2019",
+	"author": {
+        "id": 1004,
+        "name": "George R.R.",
+        "lastname": "Martin"
+    }
+}

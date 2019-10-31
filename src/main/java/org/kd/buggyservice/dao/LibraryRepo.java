@@ -28,9 +28,8 @@ public class LibraryRepo extends Repo{
 
     @Transactional
     public List<Library> readAll() {
-        List<Library> libraries = readInternalLibraries();
         //libraries.addAll(readExternalLibraries());
-        return libraries;
+        return readInternalLibraries();
     }
 
     @Transactional

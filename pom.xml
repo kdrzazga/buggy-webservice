@@ -9,8 +9,8 @@
     <version>0.3.0-RELEASE</version>
 
     <properties>
-        <maven.compiler.target>10</maven.compiler.target>
-        <maven.compiler.source>10</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <spring.version>5.0.15.RELEASE</spring.version>
@@ -34,7 +34,7 @@
         <gson.version>2.8.5</gson.version>
 
         <lombok.version>1.18.6</lombok.version>
-
+        <swagger.version>2.8.0</swagger.version>
         <maven-assembly-plugin.version>2.4.1</maven-assembly-plugin.version>
         <start-class>org.kd.buggyservice.main.BuggyWebservice</start-class>
 
@@ -176,7 +176,16 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
 
     </dependencies>
     <build>

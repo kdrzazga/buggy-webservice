@@ -1,0 +1,26 @@
+curl --user user:user -vG http://localhost:8081
+curl --user user:user -vG http://localhost:8081/logout
+curl -vX POST http://localhost:8081/stop
+
+curl --user admin:admin -vX POST --url http://localhost:8081/createBook/1002/Odyseja/1882
+curl --user user:user -vX GET http://localhost:8081/readBooks
+curl --user user:user -vX GET http://localhost:8081/readBook/2007
+curl --user admin:admin -vX DELETE http://localhost:8081/deleteBook/2002
+
+curl --user admin:admin -vX POST --url http://localhost:8081/createAuthor/John/Kochanovsky
+curl --user user:user -vX GET http://localhost:8081/readAuthors
+curl --user user:user -vX GET http://localhost:8081/readAuthor/1002
+curl --user admin:admin -vX DELETE http://localhost:8081/deleteAuthor/1002
+
+curl --user admin:admin -vX POST --url http://localhost:8081/createLibrary/Kluczbork/internal
+curl --user user:user -vX GET http://localhost:8081/readLibraries
+curl --user user:user -vX GET http://localhost:8081/readLibrary/3004
+curl --user admin:admin -vX DELETE http://localhost:8081/deleteLibrary/3004
+
+curl --user admin:admin -H 'Content-Type: application/json' -vX PUT -d '{"id" : "3002", "address" : "Radom"}' http://localhost:8081/updateLibrary
+
+curl --user admin:admin -T @C:\Users\kdrzazga\Documents\programming\buggy-webservice\curl\library_json.txt http://localhost:8081/updateLibrary -header 'Content-Type: application/json'
+
+curl --user admin:admin -vX PUT -d @C:\Users\kdrzazga\Documents\programming\buggy-webservice\curl\library_json.txt http://localhost:8081/updateLibrary -header 'Content-Type: application/json'
+
+curl --user admin:admin -vX PUT -H "Content-Type: application/json" -d '{"id":"3002", "address": "Radom"}' "http://localhost:8081/updateLibrary"

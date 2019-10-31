@@ -1,6 +1,5 @@
 package org.kd.buggyservice.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.kd.buggyservice.common.ExceptionFormatter;
 import org.kd.buggyservice.dao.AuthorRepo;
 import org.kd.buggyservice.entities.Author;
@@ -67,22 +66,21 @@ public class AuthorMgmt {
     }
 
     @PutMapping(path = "/updateAuthor", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<String> update(@RequestBody String authorJson) {
+    public ResponseEntity<Author> update(@RequestBody Author author) {
 
         try {
-            var objectMapper = new ObjectMapper();
-            var author = objectMapper.readValue(authorJson, Author.class);
+            //var author = objectMapper.readValue(authorJson, Author.class);
             var responseBody = authorRepo.update(author.getId(), author.getName(), author.getLastname());
-            var authorAsString = objectMapper.writeValueAsString(responseBody);
+            //var authorAsString = new ObjectMapper().writeValueAsString(responseBody);
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(authorAsString);
+                    .body(responseBody);//authorAsString);
 
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(ExceptionFormatter.fetchStacktrace(e));
+                    .body(null);//ExceptionFormatter.fetchStacktrace(e));
             //TODO: Security error - detailed stacktrace should only be visible on sever console, never on client
         }
     }
