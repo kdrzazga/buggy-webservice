@@ -7,8 +7,11 @@ import static org.kd.buggyservice.common.repo.Roles.USER;
 
 public final class GlobalInfo {
 
+    private static final String host = "http://localhost:";
+
     public static String getDbInfo() {
-        return "\nH2 database link: http://localhost:" + BuggyWebservice.getPort() + "/h2-console\n"
+
+        return "\nH2 database link: " + host + BuggyWebservice.getPort() + "/h2-console\n"
                 + "Credentials: user sa, (no password)\n";
     }
 
@@ -20,19 +23,8 @@ public final class GlobalInfo {
     public static String getSampleRequestsInfo() {
         var port = BuggyWebservice.getPort();
 
-        return "\n\nSample requests:\n"
-                + "\nPOST http://localhost:" + port + "/createAuthor/John/Kochanovsky"
-                + "\nPOST http://localhost:" + port + "/createLibrary/Opole/internal"
-                + "\nGET http://localhost:" + port + "/readBooks"
-                + "\nGET http://localhost:" + port + "/readAuthor/1001"
-                + "\nGET http://localhost:" + port + "/readLibrary/3004"
-                + "\nGET http://localhost:" + port + "/readLibraries"
-                + "\nPUT http://localhost:" + port + "/updateAuthor" + "\t{author json}"
-                + "\nDELETE http://localhost:" + port + "/deleteBook/2002\n"
-                + "\nPOST http://localhost:" + port + "/stop\n"
-                + "\nGET http://localhost:" + port + "/login\n"
-                + "\nGET http://localhost:" + port + "/logout\n";
-
+        return "\nOpen SWAGGER for all available set of request, login as admin\n" +
+                host + port + "/swagger-ui.html\n";
     }
 
     public static String getSampleJsonInfo() {
