@@ -42,7 +42,7 @@ public class RestUtility {
     }
 
     private HttpEntity<String> createRequestEntity(String request, String contentType) {
-        HttpHeaders httpHeaders = new HttpHeaders();
+        var httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.valueOf(contentType));
         return new HttpEntity<>(request, httpHeaders);
     }

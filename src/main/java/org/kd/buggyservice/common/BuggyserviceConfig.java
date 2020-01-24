@@ -9,6 +9,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
+
 import static org.kd.buggyservice.common.repo.Roles.ADMIN;
 
 @Configuration
@@ -27,20 +30,8 @@ class BuggyserviceConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public UserDetailsService userDetailsService() {
         var repo = new BWLoginRepo();
-        return new InMemoryUserDetailsManager(repo.getAdmin(), repo.getUser());
+        return new InMemoryUserDetailsManager(List.of(repo.admin(), repo.user()));
     }
-/*
-    @Bean
-    public AuthenticationManager authenticationManager(){
-        new AuthenticationManagerBuilder().inMemoryAuthentication()
-                .withUser("user").password("user").roles("USER")
-                .and().withUser("admin").password("admin").roles("USER", "ADMIN")
-                .and().withUser("user1@example.com").password("user1").roles("USER")
-                .and().withUser("admin1@example.com").password("admin1").roles("USER", "ADMIN")
-        ;
-        return new AuthenticationManagerBuilder().build();
-    }*/
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic() //allow for auth with login and password - necessary for Postman to login

@@ -12,7 +12,8 @@ public final class GlobalInfo {
     public static String getDbInfo() {
 
         return "\nH2 database link: " + host + BuggyWebservice.getPort() + "/h2-console\n"
-                + "Credentials: user sa, (no password)\n";
+                + "Credentials: user sa, (no password)\n"
+                + "JDBC URL = jdbc:h2:mem:testdb\n";
     }
 
     public static String getAppCredentials() {
