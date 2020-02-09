@@ -6,7 +6,7 @@
 
     <groupId>org.kd</groupId>
     <artifactId>buggywebservice</artifactId>
-    <version>0.4.5-RELEASE</version>
+    <version>0.4.7-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.target>11</maven.compiler.target>

@@ -984,3 +984,105 @@ INSERT INTO external_library (address) VALUES ('Padova');
 INSERT INTO external_library (address) VALUES ('Palanga');
 INSERT INTO external_library (address) VALUES ('Palavas-les-Flots');
 INSERT INTO external_library (address) VALUES ('Palermo');
+
+--===================================================================================================================
+--version 0.4.6
+DROP TABLE IF EXISTS books_in_internal_libraries;
+DROP TABLE IF EXISTS books_in_external_libraries;
+
+CREATE TABLE books_in_internal_libraries (
+    library_id bigint NOT NULL,
+    book_id bigint NOT NULL,
+
+    FOREIGN KEY (library_id) REFERENCES library(id),
+    FOREIGN KEY (book_id) REFERENCES book(id)
+);
+
+CREATE TABLE books_in_external_libraries (
+    library_id bigint NOT NULL,
+    book_id bigint NOT NULL,
+
+    FOREIGN KEY (library_id) REFERENCES external_library(id),
+    FOREIGN KEY (book_id) REFERENCES book(id)
+);
+
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3001, 2001);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3002, 2001);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3003, 2001);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3004, 2001);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3005, 2001);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3001, 2002);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3002, 2002);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3003, 2002);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3004, 2002);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3005, 2002);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3001, 2003);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3002, 2004);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3002, 2005);
+
+INSERT INTO books_in_external_libraries (library_id, book_id) VALUES (3013, 2002);
+INSERT INTO books_in_external_libraries (library_id, book_id) VALUES (3014, 2002);
+INSERT INTO books_in_external_libraries (library_id, book_id) VALUES (3025, 2002);
+INSERT INTO books_in_external_libraries (library_id, book_id) VALUES (3027, 2002);
+INSERT INTO books_in_external_libraries (library_id, book_id) VALUES (3031, 2002);
+INSERT INTO books_in_external_libraries (library_id, book_id) VALUES (3032, 2002);
+INSERT INTO books_in_external_libraries (library_id, book_id) VALUES (3043, 2002);
+INSERT INTO books_in_external_libraries (library_id, book_id) VALUES (3044, 2002);
+INSERT INTO books_in_external_libraries (library_id, book_id) VALUES (3045, 2002);
+INSERT INTO books_in_external_libraries (library_id, book_id) VALUES (3057, 2002);
+INSERT INTO books_in_external_libraries (library_id, book_id) VALUES (3013, 2003);
+INSERT INTO books_in_external_libraries (library_id, book_id) VALUES (3014, 2003);
+INSERT INTO books_in_external_libraries (library_id, book_id) VALUES (3025, 2003);
+INSERT INTO books_in_external_libraries (library_id, book_id) VALUES (3027, 2003);
+INSERT INTO books_in_external_libraries (library_id, book_id) VALUES (3031, 2003);
+INSERT INTO books_in_external_libraries (library_id, book_id) VALUES (3032, 2005);
+INSERT INTO books_in_external_libraries (library_id, book_id) VALUES (3043, 2005);
+INSERT INTO books_in_external_libraries (library_id, book_id) VALUES (3044, 2005);
+INSERT INTO books_in_external_libraries (library_id, book_id) VALUES (3045, 2005);
+INSERT INTO books_in_external_libraries (library_id, book_id) VALUES (3057, 2005);
+
+
+--===================================================================================================================
+--version 0.4.7
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3001, 2003);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3002, 2003);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3003, 2003);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3004, 2003);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3005, 2003);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3001, 2003);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3002, 2003);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3003, 2005);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3004, 2005);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3005, 2007);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3001, 2007);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3002, 2005);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3002, 2015);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3001, 2008);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3002, 2013);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3003, 2013);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3004, 2013);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3005, 2013);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3001, 2013);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3002, 2013);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3003, 2015);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3004, 2015);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3005, 2015);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3001, 2015);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3002, 2015);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3002, 2015);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3003, 2012);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3003, 2011);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3003, 2010);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3003, 2009);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3003, 2016);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3005, 2017);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3005, 2018);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3005, 2019);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3005, 2020);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3003, 2021);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3003, 2022);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3003, 2023);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3003, 2024);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3003, 2025);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3003, 2002);
+INSERT INTO books_in_internal_libraries (library_id, book_id) VALUES (3003, 2010);

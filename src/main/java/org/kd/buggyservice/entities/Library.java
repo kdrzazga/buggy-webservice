@@ -2,11 +2,12 @@ package org.kd.buggyservice.entities;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -19,7 +20,12 @@ public class Library implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected Long id;
+
+    @NotNull
     protected String address;
+
+    @ManyToMany(mappedBy = "libraries")
+    private Set<Book> books = new HashSet<>();
 
     public Library(String address) {
         this.address = address;

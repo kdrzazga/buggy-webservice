@@ -40,6 +40,7 @@ public class BookMgmt {
                 .body(book);
     }
 
+    /*TODO Error - ManyToMany mapping for book-library doesn't work for listing all books*/
     @GetMapping(path = "/readBooks")
     public ResponseEntity<List<Book>> readAll() {
         var book = bookRepo.readAll();
