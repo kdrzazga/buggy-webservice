@@ -6,13 +6,12 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 @NoArgsConstructor
-@Getter
-@Setter
+//@Getter
+//@Setter
 @EqualsAndHashCode
 @AllArgsConstructor
 public class Library implements Serializable {
@@ -28,6 +27,18 @@ public class Library implements Serializable {
     private Set<Book> books = new HashSet<>();
 
     public Library(String address) {
+        this.address = address;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
         this.address = address;
     }
 }

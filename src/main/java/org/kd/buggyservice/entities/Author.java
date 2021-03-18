@@ -1,7 +1,5 @@
 package org.kd.buggyservice.entities;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
@@ -9,10 +7,13 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
-@NoArgsConstructor
-@Getter
+//@NoArgsConstructor
+//@Getter
 @Setter
 public class Author implements Serializable {
+
+    public Author() {
+    }
 
     public Author(String name, String lastname) {
         this.name = name;
@@ -33,6 +34,26 @@ public class Author implements Serializable {
     )
     private List<Book> books = new ArrayList<>();
   */
+
+    public long getId() {
+        return id;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
 
     @Override
     public boolean equals(Object o) {

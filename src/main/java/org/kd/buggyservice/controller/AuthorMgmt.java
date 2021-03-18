@@ -29,7 +29,7 @@ public class AuthorMgmt {
             e.printStackTrace();
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .header("message", ExceptionFormatter.fetchStacktrace(e))
+                    .header("message", ExceptionFormatter.fetchStacktrace(e).replaceAll("\r\n", "\t"))
                     .body((long) -1);
             //TODO: Security error - detailed stacktrace should only be visible on sever console, never on client
         }

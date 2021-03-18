@@ -5,13 +5,10 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 @NoArgsConstructor
-@Getter
-@Setter
 @AllArgsConstructor
 public class Book implements Serializable {
 
@@ -31,7 +28,7 @@ public class Book implements Serializable {
             joinColumns = { @JoinColumn(name = "book_id") },
             inverseJoinColumns = { @JoinColumn(name = "library_id") }
     )
-    private Set<Library> libraries = new HashSet<>();
+    private final Set<Library> libraries = new HashSet<>();
 
     public Book(Author author, Integer published, String title) {
 
@@ -47,5 +44,25 @@ public class Book implements Serializable {
         return book.id == (this.id)
                 && book.title.equals(this.title)
                 && book.published == (this.published);
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public int getPublished() {
+        return published;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

@@ -12,6 +12,7 @@ import java.util.List;
 public class AuthorRepo extends Repo{
 
     @Transactional
+    // TODO: Functional error on purpose - only one author can be created due to Id constrains
     public Long create(String newName, String newLastName) {
         var entity = new Author(newName, newLastName);
         entityManager.persist(entity);

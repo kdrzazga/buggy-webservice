@@ -15,13 +15,13 @@ import java.util.List;
 import static org.kd.buggyservice.common.repo.Roles.ADMIN;
 
 @Configuration
-class BuggyserviceConfig extends WebSecurityConfigurerAdapter {
-
+public class BuggyserviceConfig extends WebSecurityConfigurerAdapter {
+/*
     @Bean
     public RestUtility restUtility() {
         return new RestUtility();
     }
-
+*/
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
