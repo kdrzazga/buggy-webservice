@@ -30,6 +30,10 @@ public class Book implements Serializable {
     )
     private final Set<Library> libraries = new HashSet<>();
 
+    public Book(){
+
+    }
+
     public Book(Author author, Integer published, String title) {
 
         this.author = author;
