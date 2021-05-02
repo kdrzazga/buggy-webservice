@@ -25,16 +25,6 @@ public class Author implements Serializable {
     private String name;
     private String lastname;
 
-  /* //Uncomment to create bi-directinal relation
-    @OneToMany(
-            mappedBy = "author",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.EAGER
-    )
-    private List<Book> books = new ArrayList<>();
-  */
-
     public long getId() {
         return id;
     }

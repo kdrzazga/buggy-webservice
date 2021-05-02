@@ -35,7 +35,6 @@ public class EndpointTest {
     public void testCreateAuthor() {
         var endpoint = "/createAuthor/John/Kochanovsky";
 
-        //var restTemplate = restUtility.getRestTemplate();
         restTemplate.getInterceptors()
                 .add(new BasicAuthorizationInterceptor("admin", "admin"));
 
@@ -52,7 +51,6 @@ public class EndpointTest {
     public void testReadAuthor() {
         var endpoint = "/readAuthor/1002";
         setCredentials("admin", "admin");
-        //var restTemplate = restUtility.getRestTemplate();
 
         ResponseEntity<Author> response =
                 restTemplate

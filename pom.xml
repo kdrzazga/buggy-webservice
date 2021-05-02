@@ -40,6 +40,7 @@
         <maven-assembly-plugin.version>3.1.1</maven-assembly-plugin.version>
         <start-class>org.kd.buggyservice.main.BuggyWebservice</start-class>
 
+        <rest-assured.version>4.2.0</rest-assured.version>
     </properties>
 
     <dependencies>
@@ -215,7 +216,27 @@
             <artifactId>commons-codec</artifactId>
             <version>1.10</version>
         </dependency>
-
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-path</artifactId>
+            <version>${rest-assured.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>xml-path</artifactId>
+            <version>${rest-assured.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-schema-validator</artifactId>
+            <version>${rest-assured.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest-assured.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

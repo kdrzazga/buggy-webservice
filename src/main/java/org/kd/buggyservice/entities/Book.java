@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@NoArgsConstructor
+//@NoArgsConstructor
 @AllArgsConstructor
 public class Book implements Serializable {
 
@@ -29,6 +29,10 @@ public class Book implements Serializable {
             inverseJoinColumns = { @JoinColumn(name = "library_id") }
     )
     private final Set<Library> libraries = new HashSet<>();
+
+    public Book(){
+
+    }
 
     public Book(Author author, Integer published, String title) {
 

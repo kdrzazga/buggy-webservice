@@ -8,7 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 @Component
-@Import(BuggyserviceConfig.class)
+@Import(WebserviceConfig.class)
 public class AuthorityUtils {
 
     //@Autowired

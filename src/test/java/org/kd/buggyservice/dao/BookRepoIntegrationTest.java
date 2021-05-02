@@ -41,11 +41,11 @@ public class BookRepoIntegrationTest {
         //var newBook = new Book(initialId, "Fake Book", 1, 0);
         var newBook = new Book(authorRepo.read(1002L), 1, "Fake Book" );
 
-        Long newId = bookRepo.create(newBook);
+        long newId = bookRepo.create(newBook);
 
         var readBook = bookRepo.read(newId);
         assertNotNull(newId);
-        assertEquals(newId.longValue(), readBook.getId());
+        assertEquals(newId, readBook.getId());
         //bookRepo.delete(initialId); -> purposely delete doesn't work
     }
 
